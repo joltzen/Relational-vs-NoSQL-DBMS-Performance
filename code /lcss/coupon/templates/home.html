@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block content %} {% for coupon in coupons %}
+<h1>{{ coupon.name }}</h1>
+<p>{{ coupon.expire_date }}</p>
+<p>{{ coupon.discount_amount }}</p>
+<p>{{ coupon.score }}</p>
+<p>{{ coupon.comments }}</p>
+<p>{{ coupon.hashtag }}</p>
+
+{% endfor %} {% endblock content %}
