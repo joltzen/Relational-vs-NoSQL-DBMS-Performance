@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
-from .forms import getUserForm, createUserForm
-from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth import (authenticate, login, logout,
+                                 update_session_auth_hash)
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.shortcuts import redirect, render
+
+from .forms import createUserForm, getUserForm
 
 coupons = [
     {
@@ -62,6 +64,7 @@ coupons = [
     },
 ]
 
+
 # Form for the login of a user
 def login(request):
     form = getUserForm()
@@ -81,15 +84,18 @@ def login(request):
 
     return render(request, "login.html", {"form": form})
 
+
 # Form for the home view
 def home(request):
     context = {"coupons": coupons}
     return render(request, "home.html", context)
 
+
 # Form for the profil of the logged in user
 # @login_required(login_url="login")
 def profil(request):
     return render(request, "profil.html")
+
 
 # Form for the signup of a new user
 def signup(request):
@@ -107,13 +113,16 @@ def signup(request):
 
     return render(request, "signup.html", {"form": form})
 
+
 # Form for the creation of a thread
 def create(request):
     return render(request, "threadcreate.html")
 
+
 # Form for the detail view of a thread
 def detail(request):
     return render(request, "threaddetail.html")
+
 
 # Form to change password
 def changepassword(request):
@@ -127,6 +136,7 @@ def changepassword(request):
     else:
         form = PasswordChangeForm(request.user.request.POST)
     return render(request, "changepassword.html", {"form": form})
+
 
 # Form to logout user
 def logoutUser(request):

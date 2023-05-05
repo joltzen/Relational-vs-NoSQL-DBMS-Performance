@@ -7,8 +7,16 @@ from django.contrib.auth.models import User
 class createUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields =["username", "first_name", "last_name", "email", "password1", "password2"]
-        
+        fields = [
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "password1",
+            "password2",
+        ]
+
+
 # Form to login a User
 class getUserForm(forms.ModelForm):
     class Meta:
