@@ -1,3 +1,8 @@
 {% extends "base.html" %} {% block content %}
-<h1>Thread detail Page!</h1>
+<ul>
+    <li>Coupon: {{ coupon.name }}</li>
+    <li>Discount: {{ coupon.discount_amt }}</li>
+    <li>Expires: {{ coupon.expiring_date }}</li>
+    <li>Score: {{ coupon.score }}</li>
+</ul>
 {% endblock content %}

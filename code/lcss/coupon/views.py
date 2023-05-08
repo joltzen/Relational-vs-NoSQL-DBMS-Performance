@@ -1,106 +1,18 @@
 from django.contrib import messages
-from django.contrib.auth import (authenticate, login, logout,
-                                 update_session_auth_hash)
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import createUserForm, getUserForm
-
-coupons = [
-    {
-        "ID": "1",
-        "expire_date": "2021-10-01",
-        "discount_amount": "10%",
-        "name": "Gutschein 1",
-        "score": "5",
-        "comments": "Kommentar1",
-        "hashtag": "#Gutschein1",
-    },
-    {
-        "ID": "2",
-        "expire_date": "2021-10-01",
-        "discount_amount": "10%",
-        "name": "Gutschein 2",
-        "score": "5",
-        "comments": "Kommentar1",
-        "hashtag": "#Gutschein1",
-    },
-    {
-        "ID": "3",
-        "expire_date": "2021-10-01",
-        "discount_amount": "10%",
-        "name": "Gutschein3",
-        "score": "5",
-        "comments": "Kommentar1",
-        "hashtag": "#Gutschein1",
-    },
-    {
-        "ID": "4",
-        "expire_date": "2021-10-01",
-        "discount_amount": "10%",
-        "name": "Gutschein 4",
-        "score": "5",
-        "comments": "Kommentar1",
-        "hashtag": "#Gutschein1",
-    },
-    {
-        "ID": "5",
-        "expire_date": "2021-10-01",
-        "discount_amount": "10%",
-        "name": "Gutschein 5",
-        "score": "5",
-        "comments": "Kommentar1",
-        "hashtag": "#Gutschein1",
-    },
-    {
-        "ID": "6",
-        "expire_date": "2021-10-01",
-        "discount_amount": "10%",
-        "name": "Gutschein 6",
-        "score": "5",
-        "comments": "Kommentar1",
-        "hashtag": "#Gutschein1",
-    },
-]
-
-
-# Form for the login of a user
-def login(request):
-    form = getUserForm()
-    if request.user.is_authenticated:
-        return redirect("loggedin")
-    else:
-        if request.method == "POST":
-            username = request.POST.get("username")
-            password = request.POST.get("password")
-            user = authenticate(request, password=password, username=username)
-
-            if user is not None:
-                login(request, user)
-                return redirect("loggedin")
-            else:
-                messages.info(request, "Username or Password is incorrect")
-
-    return render(request, "login.html", {"form": form})
-
-
-# Form for the home view
-def home(request):
-    context = {"coupons": coupons}
-    return render(request, "home.html", context)
-
-
-# Form for the profil of the logged in user
-# @login_required(login_url="login")
-def profil(request):
-    return render(request, "profil.html")
+from .forms import createCouponForm, createUserForm, getUserForm
+from .models import Coupon
 
 
 # Form for the signup of a new user
 def signup(request):
     if request.user.is_authenticated:
-        return redirect("loggedin")
+        return redirect("home")
+        # return redirect("loggedin")
     else:
         form = createUserForm()
         if request.method == "POST":
@@ -114,14 +26,56 @@ def signup(request):
     return render(request, "signup.html", {"form": form})
 
 
+# Form for the login of a user
+def loginUser(request):
+    form = getUserForm()
+    if request.user.is_authenticated:
+        return redirect("home")
+        # return redirect("loggedin")
+    else:
+        if request.method == "POST":
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+            user = authenticate(request, password=password, username=username)
+
+            if user is not None:
+                login(request, user)
+                return redirect("home")
+                # return redirect("loggedin")
+            else:
+                messages.info(request, "Username or Password is incorrect")
+
+    return render(request, "login.html", {"form": form})
+
+
+# Form for the profile of the logged in user
+@login_required(login_url="login")
+def profile(request):
+    return render(request, "profile.html")
+
+
+# Form for the home view
+def home(request):
+    coupons = Coupon.objects.all()
+    return render(request, "home.html", {"coupons": coupons})
+
+
 # Form for the creation of a thread
 def create(request):
-    return render(request, "threadcreate.html")
+    if request.method == "POST":
+        form = createCouponForm(request.POST)
+        if form.is_valid():
+            coupon = form.save()
+            return redirect("detail-thread", coupon_id=coupon.pk)
+    else:
+        form = createCouponForm()
+    return render(request, "threadcreate.html", {"form": form})
 
 
 # Form for the detail view of a thread
-def detail(request):
-    return render(request, "threaddetail.html")
+def detail(request, coupon_id):
+    coupon = get_object_or_404(Coupon, pk=coupon_id)
+    return render(request, "threaddetail.html", {"coupon": coupon})
 
 
 # Form to change password
@@ -132,7 +86,7 @@ def changepassword(request):
             user = form.save()
             update_session_auth_hash(request, user)
             messages.success(request, "Password changed successfully")
-            return redirect("profil")
+            return redirect("profile")
     else:
         form = PasswordChangeForm(request.user.request.POST)
     return render(request, "changepassword.html", {"form": form})

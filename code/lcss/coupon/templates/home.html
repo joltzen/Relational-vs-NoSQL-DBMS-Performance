@@ -1,9 +1,14 @@
-{% extends "base.html" %} {% block content %} {% for coupon in coupons %}
-<h1>{{ coupon.name }}</h1>
-<p>{{ coupon.expire_date }}</p>
-<p>{{ coupon.discount_amount }}</p>
-<p>{{ coupon.score }}</p>
-<p>{{ coupon.comments }}</p>
-<p>{{ coupon.hashtag }}</p>
+{% extends "base.html" %} {% block content %}
 
-{% endfor %} {% endblock content %}
+{% if coupons %}
+<ul>
+    {% for coupon in coupons %}
+    <li><a href="/coupons/{{ coupon.id }}/">{{ coupon.name }}</a></li>
+    <li><a href="{% url 'detail-thread' coupon.id %}">{{ coupon.name }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No coupons are available.</p>
+{% endif %}
+
+{% endblock content %}
