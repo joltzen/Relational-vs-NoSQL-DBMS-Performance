@@ -20,3 +20,9 @@ python3 manage.py runserver
 python3 manage.py makemigrations coupon
 python3 manage.py migrate
 ```
+
+### Admin console
+
+```
+python3 manage.py runserver
+```

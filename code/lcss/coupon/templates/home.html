@@ -1,4 +1,5 @@
 {% extends 'base.html' %} {% block content %} {% for coupon in coupons %}
+
 <div class="card">
   <div class="card-content">
     <a href="{% url 'detail-thread' coupon.id %}">
@@ -6,28 +7,35 @@
     >
     <p>{{ coupon.description }}</p>
   </div>
-  <div class="card-action coupon-actions">
-    <form action="/downvote/{{ coupon.id }}/" method="POST" class="coupon-form">
-      {% csrf_token %}
-      <button class="scoresbutton">
-        <i class="material-icons blue-text text-lighten-1">remove</i>
-      </button>
-    </form>
-    {% if coupon.score > 0 %}
-    <span class="scores-container red-text text-accent-3"
-      >{{ coupon.score }}</span
-    >
-    {% else %}
-    <span class="scores-container blue-text text-lighten-1"
-      >{{ coupon.score }}</span
-    >
-    {% endif %}
-    <form action="/upvote/{{ coupon.id }}/" method="POST" class="coupon-form">
-      {% csrf_token %}
-      <button class="scoresbutton">
-        <i class="material-icons red-text text-accent-3">add</i>
-      </button>
-    </form>
+  <div class="coupon-actions-container">
+    <div class="coupon-actions">
+      <form
+        action="/downvote/{{ coupon.id }}/"
+        method="POST"
+        class="coupon-form"
+      >
+        {% csrf_token %}
+        <button class="btn-flat coupon-action-btn">
+          <i class="material-icons blue-text text-lighten-1">remove</i>
+        </button>
+      </form>
+      {% if coupon.score > 0 %}
+      <span class="scores-container red-text text-accent-3"
+        >{{ coupon.score }}</span
+      >
+      {% else %}
+      <span class="scores-container blue-text text-lighten-1"
+        >{{ coupon.score }}</span
+      >
+      {% endif %}
+      <form action="/upvote/{{ coupon.id }}/" method="POST" class="coupon-form">
+        {% csrf_token %}
+        <button class="btn-flat coupon-action-btn">
+          <i class="material-icons red-text text-accent-3">add</i>
+        </button>
+      </form>
+    </div>
   </div>
 </div>
+
 {% endfor %} {% endblock %}

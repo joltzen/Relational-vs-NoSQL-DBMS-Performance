@@ -30,8 +30,13 @@
               </form>
             </div>
           </li>
+           {% if user.is_authenticated %}
+          <li><a class="login" href="{% url 'profile' %}"><i class="material-icons left">person</i>Profile
+          </a></li>
+          {% else %}
           <li><a class="login" href="{% url 'login' %}"><i class="material-icons left">person</i>Login
-</a></li>
+          </a></li>
+          {% endif %}
           <li>
             <a class="create-thread" href="{% url 'create-thread' %}">
               <i class="material-icons left">add</i>Create Coupon

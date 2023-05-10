@@ -51,7 +51,9 @@ def loginUser(request):
 # Form for the profile of the logged in user
 @login_required(login_url="login")
 def profile(request):
-    return render(request, "profile.html")
+    if request.method == "GET":
+        return render(request, 'profile.html')
+
 
 
 # Form for the home view
@@ -60,18 +62,22 @@ def home(request):
     return render(request, "home.html", {"coupons": coupons})
 
 
-# Form for the creation of a thread
+
+from django.contrib.auth.decorators import login_required
+
+
+@login_required
 def create(request):
     if request.method == "POST":
         form = createCouponForm(request.POST)
         if form.is_valid():
-            coupon = form.save()
+            coupon = form.save(commit=False)
+            coupon.user = request.user
+            coupon.save()
             return redirect("detail-thread", coupon_id=coupon.pk)
     else:
         form = createCouponForm()
     return render(request, "threadcreate.html", {"form": form})
-
-
 # Form for the detail view of a thread
 def detail(request, coupon_id):
     coupon = get_object_or_404(Coupon, pk=coupon_id)
@@ -111,3 +117,8 @@ def downvote(request,id):
         coupon.score -= 1
         coupon.save()
     return redirect("home")
+
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
+        
