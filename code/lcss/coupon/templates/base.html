@@ -16,7 +16,7 @@
 <body>
   <div class="navbar">
     <nav>
-      <div class="nav-wrapper indigo darken-1">
+      <div class="nav-wrapper navcolor">
         <a href="/" class="brand-logo navheader">Coupon App</a>
         <ul class="right hide-on-med-and-down">
 
@@ -30,7 +30,8 @@
               </form>
             </div>
           </li>
-          <li><a class="login" href="{% url 'login' %}">Login</a></li>
+          <li><a class="login" href="{% url 'login' %}"><i class="material-icons left">person</i>Login
+</a></li>
           <li>
             <a class="create-thread" href="{% url 'create-thread' %}">
               <i class="material-icons left">add</i>Create Coupon

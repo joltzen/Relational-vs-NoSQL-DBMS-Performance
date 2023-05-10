@@ -1,8 +1,7 @@
 {% extends "base.html" %} {% block content %}
 <form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Create">
-    <input type="reset">
+  {% csrf_token %} {{ form.as_p }}
+  <button class="btn btncolor" type="submit">Create</button>
+  <button class="btn btncolor" type="reset">Reset</button>
 </form>
 {% endblock content %}
