@@ -96,3 +96,18 @@ def changepassword(request):
 def logoutUser(request):
     logout(request)
     return redirect("home")
+
+
+def upvote(request,id):
+    coupon = get_object_or_404(Coupon, pk=id)
+    if request.method == "POST":
+        coupon.score += 1
+        coupon.save()
+    return redirect("home")
+
+def downvote(request,id):
+    coupon = get_object_or_404(Coupon, pk=id)
+    if request.method == "POST":
+        coupon.score -= 1
+        coupon.save()
+    return redirect("home")

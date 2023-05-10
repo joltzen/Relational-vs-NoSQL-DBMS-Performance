@@ -50,3 +50,20 @@
 .create-thread {
   background-color: green !important;
 }
+.coupon-actions {
+  display: flex;
+  align-items: center;
+}
+
+.coupon-form {
+  margin-right: 10px;
+}
+
+.scores-container {
+  margin: 0 10px;
+}
+
+.scoresbutton {
+  border: none;
+  background-color: transparent;
+}
