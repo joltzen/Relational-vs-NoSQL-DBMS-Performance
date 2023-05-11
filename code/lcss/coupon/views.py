@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import get_object_or_404, redirect, render
-
+from random import randint
 from .forms import createCouponForm, createUserForm, getUserForm, CommentForm
 from .models import Coupon, Comment
 
@@ -77,6 +77,7 @@ def create(request):
         if form.is_valid():
             coupon = form.save(commit=False)
             coupon.user = request.user
+            coupon.code = coupon.name.replace(" ", "") + str(int(coupon.discount_amt))
             coupon.save()
             return redirect("detail-thread", coupon_id=coupon.pk)
     else:
@@ -166,7 +167,6 @@ def add_comment(request, coupon_id):
     return render(request, "add_comment.html", {"form": form})
 
 
-@login_required(login_url="login")
 def all_comments(request, coupon_id):
     coupon = get_object_or_404(Coupon, pk=coupon_id)
     comments = Comment.objects.filter(coupon=coupon).order_by("-created_date")

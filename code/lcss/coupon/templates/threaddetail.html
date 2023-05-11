@@ -7,7 +7,7 @@
           <div class="card-content">
             <h4
               class="card-title"
-              style="font-size: 2.5rem; font-weight: 500; margin-bottom: 0"
+              style="font-size: 2.5rem; font-weight: 500"
             >
               {{ coupon.name }}
             </h4>
@@ -17,29 +17,26 @@
                 <div class="divider" style="margin: 1rem 0"></div>
               </div>
               <div class="col s12 m6 l3">
-                <p style="font-size: 1.25rem; margin-bottom: 0">Discount:</p>
-                <p style="font-size: 2rem; font-weight: 500; margin-bottom: 0">
-                  {{ coupon.discount_amt }}
-                </p>
-                <p style="font-size: 1rem; margin-bottom: 0">
-                  {{ coupon.discount_type }}
+                <p style="font-size: 1.25rem">Discount:</p>
+                <p style="font-size: 2rem; font-weight: 500">
+                  {{ coupon.discount_amt|floatformat }}%
                 </p>
               </div>
               <div class="col s12 m6 l3">
-                <p style="font-size: 1.25rem; margin-bottom: 0">Expires:</p>
-                <p style="font-size: 2rem; font-weight: 500; margin-bottom: 0">
+                <p style="font-size: 1.25rem">Expires:</p>
+                <p style="font-size: 2rem; font-weight: 500">
                   {{ coupon.expiring_date|date:"F d, Y" }}
                 </p>
               </div>
               <div class="col s12 m6 l3">
-                <p style="font-size: 1.25rem; margin-bottom: 0">Code:</p>
-                <p style="font-size: 2rem; font-weight: 500; margin-bottom: 0">
+                <p style="font-size: 1.25rem">Code:</p>
+                <p style="font-size: 2rem; font-weight: 500">
                   {{ coupon.code }}
                 </p>
               </div>
               <div class="col s12 m6 l3">
-                <p style="font-size: 1.25rem; margin-bottom: 0">Score:</p>
-                <p style="font-size: 2rem; font-weight: 500; margin-bottom: 0">
+                <p style="font-size: 1.25rem">Score:</p>
+                <p style="font-size: 2rem; font-weight: 500">
                   {{ coupon.score }}
                 </p>
               </div>
@@ -66,7 +63,7 @@
           <div class="card-content">
             <h4
               class="card-title"
-              style="font-size: 2.5rem; font-weight: 500; margin-bottom: 0"
+              style="font-size: 2.5rem; font-weight: 500"
             >
               Add a Comment
             </h4>

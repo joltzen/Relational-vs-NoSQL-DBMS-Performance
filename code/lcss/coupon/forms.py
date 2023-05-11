@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Coupon
+from .models import Coupon, Comment
 
 
 # Form to create a new User
@@ -47,12 +47,9 @@ class createCouponForm(forms.ModelForm):
         ]
 
 
-from django import forms
-from .models import Comment
-
 class CommentForm(forms.ModelForm):
-    text = forms.CharField(widget=forms.Textarea(attrs={'rows':3}))
+    text = forms.CharField(widget=forms.Textarea(attrs={"rows": 3}))
 
     class Meta:
         model = Comment
-        fields = ('text',)
+        fields = ("text",)

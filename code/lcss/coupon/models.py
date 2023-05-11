@@ -11,6 +11,7 @@ class Coupon(models.Model):
     expiring_date = models.DateTimeField(null=True, blank=True)
     discount_amt = models.FloatField(default=0.0)
     score = models.IntegerField(default=0)
+    code = models.CharField(max_length=32, blank=False, null=False, default="Coupon")
 
     def __str__(self):
         return "%s - %s" % (self.user, self.id)
