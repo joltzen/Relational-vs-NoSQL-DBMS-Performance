@@ -1,5 +1,4 @@
 {% extends 'base.html' %} {% block content %} {% for coupon in coupons %}
-
 <div class="card">
   <div class="card-content">
     <div class="coupon-title">
@@ -39,44 +38,61 @@
           </form>
         </div>
       </div>
-      <div class="coupon-actions-container">
-        <div class="coupon-actions">
-          <div class="coupon-code">
-            <p>{{ coupon.code }}</p>
-          </div>
-          <button
-            class="btn-flat coupon-action-btn"
-            onclick="copyCouponCode('{{ coupon.code }}')"
-          >
-            <i style="color: #69be28" class="material-icons">content_copy</i>
-          </button>
+      <div class="discount-container">
+        <div class="coupon-discount">
+          <p>-{{ coupon.discount_amt|floatformat }}%</p>
         </div>
-      </div>
-      <div class="coupon-expiration">
-        <p class="grey-text text-lighten-1">
-          <i class="tiny material-icons grey-text text-lighten-1"
-            >hourglass_full</i
-          >
-          {{ coupon.expiring_date }}
-        </p>
+        </div>
+        <div class="coupon-actions-container">
+          <div class="coupon-actions">
+            <div class="coupon-code">
+              <p>{{ coupon.code }}</p>
+            </div>
+            <button
+              class="btn-flat coupon-action-btn"
+              onclick="copyCouponCode('{{ coupon.code }}')"
+            >
+              <i style="color: #69be28" class="material-icons">content_copy</i>
+            </button>
+          </div>
+        </div>
+
+        <div class="coupon-expiration">
+          <p class="grey-text text-lighten-1">
+            <i class="tiny material-icons grey-text text-lighten-1"
+              >hourglass_full</i
+            >
+            {{ coupon.expiring_date }}
+          </p>
+        </div>
+
+        
+        <div class="coupon-comments-container">
+          {{ coupon.comments_amt }}
+           <a
+             href="{% url 'all_comments' coupon.id %}"
+              class="comment-icon-btn"
+              ><i style="margin-top: 5px; margin-left:5px" class="tiny material-icons grey-text text-lighten-1"
+              >mode_comment</i
+            >  </a
+            >
+              
+        </div>
       </div>
     </div>
   </div>
+  {% endfor %}
+
+  <script>
+    function copyCouponCode(code) {
+      const tempTextarea = document.createElement("textarea");
+      tempTextarea.value = code;
+      document.body.appendChild(tempTextarea);
+      tempTextarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempTextarea);
+    }
+  </script>
+
+  {% endblock %}
 </div>
-
-{% endfor %}
-
-<script>
-  function copyCouponCode(code) {
-    const tempTextarea = document.createElement("textarea");
-    tempTextarea.value = code;
-    document.body.appendChild(tempTextarea);
-    tempTextarea.select();
-    // Copy the code to clipboard
-    document.execCommand("copy");
-    // Remove the temporary textarea element
-    document.body.removeChild(tempTextarea);
-  }
-</script>
-
-{% endblock %}

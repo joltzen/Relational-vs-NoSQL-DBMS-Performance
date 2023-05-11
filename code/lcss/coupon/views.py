@@ -54,7 +54,6 @@ def profile(request):
     if request.method == "GET":
         user_coupons = Coupon.objects.filter(user=request.user)
         context_dict = {}
-        result = []
         saving_list = []
         for e in user_coupons:
             saving_list.append(e)
@@ -67,6 +66,10 @@ def profile(request):
 # Form for the home view
 def home(request):
     coupons = Coupon.objects.all()
+    for coupon in coupons:
+        comments = Comment.objects.filter(coupon=coupon)
+        coupon.comments_amt = comments.count()
+        coupon.save()
     return render(request, "home.html", {"coupons": coupons})
 
 

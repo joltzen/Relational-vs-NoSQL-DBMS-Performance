@@ -12,6 +12,7 @@ class Coupon(models.Model):
     discount_amt = models.FloatField(default=0.0)
     score = models.IntegerField(default=0)
     code = models.CharField(max_length=32, blank=False, null=False, default="Coupon")
+    comments_amt = models.IntegerField(default=0)
 
     def __str__(self):
         return "%s - %s" % (self.user, self.id)
