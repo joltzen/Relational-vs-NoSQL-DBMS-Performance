@@ -57,12 +57,11 @@ def profile(request):
         result = []
         saving_list = []
         for e in user_coupons:
-            saving_list.append(e) 
-        
-        context_dict["result"] = saving_list
-    
-    return render(request, "profile.html", context_dict)
+            saving_list.append(e)
 
+        context_dict["result"] = saving_list
+
+    return render(request, "profile.html", context_dict)
 
 
 # Form for the home view
@@ -83,10 +82,15 @@ def create(request):
     else:
         form = createCouponForm()
     return render(request, "threadcreate.html", {"form": form})
+
+
 # Form for the detail view of a thread
 def detail(request, coupon_id):
     coupon = get_object_or_404(Coupon, pk=coupon_id)
-    return render(request, "threaddetail.html", {"coupon": coupon})
+    comments = Comment.objects.filter(coupon=coupon)
+    form = CommentForm()
+    context = {"coupon": coupon, "comments": comments, "form": form}
+    return render(request, "threaddetail.html", context)
 
 
 # Form to change password
@@ -110,32 +114,61 @@ def logoutUser(request):
     logout(request)
     return redirect("home")
 
+
 # Form to upvote a thread
 @login_required(login_url="login")
-def upvote(request,id):
+def upvote(request, id):
     coupon = get_object_or_404(Coupon, pk=id)
     if request.method == "POST":
         coupon.score += 1
         coupon.save()
     return redirect("home")
 
+
 # Form to downvote a thread
 @login_required(login_url="login")
-def downvote(request,id):
+def downvote(request, id):
     coupon = get_object_or_404(Coupon, pk=id)
     if request.method == "POST":
         coupon.score -= 1
         coupon.save()
     return redirect("home")
 
+
 # Form to logout a user
 @login_required(login_url="login")
 def logoutUser(request):
     logout(request)
-    return redirect('home')
+    return redirect("home")
 
-#Form to delte a thread
+
+# Form to delte a thread
 @login_required(login_url="login")
 def delete(request, id):
     get_object_or_404(Coupon, pk=id).delete()
-    return redirect('profile')
+    return redirect("profile")
+
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .models import Comment
+from .forms import CommentForm
+from .models import Coupon
+
+
+@login_required
+def add_comment(request, coupon_id):
+    coupon = get_object_or_404(Coupon, id=coupon_id)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.coupon = coupon
+            comment.user = request.user
+            comment.save()
+            messages.success(request, "Your comment was added successfully.")
+            return redirect("detail-thread", coupon.id)
+    else:
+        form = CommentForm()
+    return render(request, "add_comment.html", {"form": form})
