@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+# TODO: Add a field for the coupon code
 class Coupon(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, unique=False, blank=True)    
     name = models.CharField(max_length=32)

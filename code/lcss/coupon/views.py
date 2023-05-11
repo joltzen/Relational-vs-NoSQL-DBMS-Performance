@@ -52,7 +52,16 @@ def loginUser(request):
 @login_required(login_url="login")
 def profile(request):
     if request.method == "GET":
-        return render(request, 'profile.html')
+        user_coupons = Coupon.objects.filter(user=request.user)
+        context_dict = {}
+        result = []
+        saving_list = []
+        for e in user_coupons:
+            saving_list.append(e) 
+        
+        context_dict["result"] = saving_list
+    
+    return render(request, "profile.html", context_dict)
 
 
 
@@ -62,11 +71,7 @@ def home(request):
     return render(request, "home.html", {"coupons": coupons})
 
 
-
-from django.contrib.auth.decorators import login_required
-
-
-@login_required
+@login_required(login_url="login")
 def create(request):
     if request.method == "POST":
         form = createCouponForm(request.POST)
@@ -85,6 +90,7 @@ def detail(request, coupon_id):
 
 
 # Form to change password
+@login_required(login_url="login")
 def changepassword(request):
     if request.method == "POST":
         form = PasswordChangeForm(request.user.request.POST)
@@ -99,11 +105,13 @@ def changepassword(request):
 
 
 # Form to logout user
+@login_required(login_url="login")
 def logoutUser(request):
     logout(request)
     return redirect("home")
 
-
+# Form to upvote a thread
+@login_required(login_url="login")
 def upvote(request,id):
     coupon = get_object_or_404(Coupon, pk=id)
     if request.method == "POST":
@@ -111,6 +119,8 @@ def upvote(request,id):
         coupon.save()
     return redirect("home")
 
+# Form to downvote a thread
+@login_required(login_url="login")
 def downvote(request,id):
     coupon = get_object_or_404(Coupon, pk=id)
     if request.method == "POST":
@@ -118,7 +128,14 @@ def downvote(request,id):
         coupon.save()
     return redirect("home")
 
+# Form to logout a user
+@login_required(login_url="login")
 def logoutUser(request):
     logout(request)
     return redirect('home')
-        
+
+#Form to delte a thread
+@login_required(login_url="login")
+def delete(request, id):
+    get_object_or_404(Coupon, pk=id).delete()
+    return redirect('profile')
