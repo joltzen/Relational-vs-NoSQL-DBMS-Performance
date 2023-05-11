@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import createCouponForm, createUserForm, getUserForm
-from .models import Coupon
+from .forms import createCouponForm, createUserForm, getUserForm, CommentForm
+from .models import Coupon, Comment
 
 
 # Form for the signup of a new user
@@ -87,7 +87,7 @@ def create(request):
 # Form for the detail view of a thread
 def detail(request, coupon_id):
     coupon = get_object_or_404(Coupon, pk=coupon_id)
-    comments = Comment.objects.filter(coupon=coupon)
+    comments = Comment.objects.filter(coupon=coupon).order_by("-created_date")
     form = CommentForm()
     context = {"coupon": coupon, "comments": comments, "form": form}
     return render(request, "threaddetail.html", context)
@@ -149,15 +149,7 @@ def delete(request, id):
     return redirect("profile")
 
 
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from .models import Comment
-from .forms import CommentForm
-from .models import Coupon
-
-
-@login_required
+@login_required(login_url="login")
 def add_comment(request, coupon_id):
     coupon = get_object_or_404(Coupon, id=coupon_id)
     if request.method == "POST":
@@ -172,3 +164,12 @@ def add_comment(request, coupon_id):
     else:
         form = CommentForm()
     return render(request, "add_comment.html", {"form": form})
+
+
+@login_required(login_url="login")
+def all_comments(request, coupon_id):
+    coupon = get_object_or_404(Coupon, pk=coupon_id)
+    comments = Comment.objects.filter(coupon=coupon).order_by("-created_date")
+    return render(
+        request, "all_comments.html", {"coupon": coupon, "comments": comments}
+    )

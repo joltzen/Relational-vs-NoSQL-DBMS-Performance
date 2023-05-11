@@ -12,6 +12,9 @@ urlpatterns = [
     path("coupons/<int:coupon_id>/", views.detail, name="detail-thread"),
     path("logout/", views.logoutUser, name="logout"),
     path("add_comment/<int:coupon_id>/", views.add_comment, name="add_comment"),
+    path(
+        "coupons/<int:coupon_id>/comments/all/", views.all_comments, name="all_comments"
+    ),
     url(r"^upvote/(?P<id>\d+)/$", views.upvote, name="upvote"),
     url(r"^downvote/(?P<id>\d+)/$", views.downvote, name="downvote"),
     url(r"^delete/(?P<id>\d+)/$", views.delete, name="delete"),
