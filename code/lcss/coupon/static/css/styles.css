@@ -50,6 +50,11 @@
   background-color: #69be28 !important;
   border-radius: 100px;
 }
+.btn-style {
+  background-color: #1a639c !important;
+  border-radius: 50px;
+  transform: translateX(-15%);
+}
 .login {
   background-color: #1a639c !important;
   border-radius: 50px;
