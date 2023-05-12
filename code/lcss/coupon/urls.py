@@ -20,6 +20,7 @@ urlpatterns = [
         views.coupon_by_hashtag,
         name="coupon_by_hashtag",
     ),
+    path("search_coupons/", views.search_coupons, name="search_coupons"),
     url(r"^upvote/(?P<id>\d+)/$", views.upvote, name="upvote"),
     url(r"^downvote/(?P<id>\d+)/$", views.downvote, name="downvote"),
     url(r"^delete/(?P<id>\d+)/$", views.delete, name="delete"),

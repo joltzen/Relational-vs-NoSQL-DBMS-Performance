@@ -76,3 +76,7 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ("text",)
+
+
+class CouponSearchForm(forms.Form):
+    search_query = forms.CharField(max_length=100, required=False)

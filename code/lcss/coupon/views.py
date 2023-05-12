@@ -4,7 +4,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import get_object_or_404, redirect, render
 from random import randint
-from .forms import createCouponForm, createUserForm, getUserForm, CommentForm
+from .forms import (
+    createCouponForm,
+    createUserForm,
+    getUserForm,
+    CommentForm,
+    CouponSearchForm,
+)
 from .models import Coupon, Comment, Hashtag
 
 
@@ -70,7 +76,11 @@ def home(request):
         comments = Comment.objects.filter(coupon=coupon)
         coupon.comments_amt = comments.count()
         coupon.save()
-    return render(request, "home.html", {"coupons": coupons})
+    return render(
+        request,
+        "home.html",
+        {"coupons": coupons},
+    )
 
 
 @login_required(login_url="login")
@@ -181,4 +191,22 @@ def all_comments(request, coupon_id):
 def coupon_by_hashtag(request, hashtag_name):
     coupons = Coupon.objects.filter(hashtags__name=hashtag_name)
     context = {"coupons": coupons, "hashtag_name": hashtag_name}
+    return render(request, "coupon_by_hashtag.html", context)
+
+
+def search_coupons(request):
+    form = CouponSearchForm(request.GET)
+    if form.is_valid():
+        search_query = form.cleaned_data.get("search_query")
+        if search_query:
+            coupons = Coupon.objects.filter(hashtags__name__icontains=search_query)
+        else:
+            coupons = Coupon.objects.all()
+    else:
+        coupons = Coupon.objects.all()
+    context = {
+        "coupons": coupons,
+        "coupon_search_form": CouponSearchForm(),
+        "hashtag_name": search_query,
+    }
     return render(request, "coupon_by_hashtag.html", context)
