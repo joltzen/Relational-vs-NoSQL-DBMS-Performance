@@ -99,6 +99,7 @@ def create(request):
 
 
 # Form for the detail view of a thread
+@login_required(login_url="login")
 def detail(request, coupon_id):
     coupon = get_object_or_404(Coupon, pk=coupon_id)
     comments = Comment.objects.filter(coupon=coupon).order_by("-created_date")
@@ -180,6 +181,7 @@ def add_comment(request, coupon_id):
     return render(request, "add_comment.html", {"form": form})
 
 
+@login_required(login_url="login")
 def all_comments(request, coupon_id):
     coupon = get_object_or_404(Coupon, pk=coupon_id)
     comments = Comment.objects.filter(coupon=coupon).order_by("-created_date")
