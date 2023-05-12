@@ -2,7 +2,18 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# TODO: Add a field for the coupon code
+class Hashtag(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.name.startswith("#"):
+            self.name = f"#{self.name}"
+        super().save(*args, **kwargs)
+
+
 class Coupon(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, unique=False, blank=True
@@ -13,6 +24,7 @@ class Coupon(models.Model):
     score = models.IntegerField(default=0)
     code = models.CharField(max_length=32, blank=False, null=False, default="Coupon")
     comments_amt = models.IntegerField(default=0)
+    hashtags = models.ManyToManyField(Hashtag)
 
     def __str__(self):
         return "%s - %s" % (self.user, self.id)
@@ -28,8 +40,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
-
-
-class Hashtag(models.Model):
-    name = models.CharField(max_length=32)
-    coupons = models.ManyToManyField(Coupon, blank=True)

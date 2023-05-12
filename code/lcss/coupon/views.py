@@ -5,7 +5,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import get_object_or_404, redirect, render
 from random import randint
 from .forms import createCouponForm, createUserForm, getUserForm, CommentForm
-from .models import Coupon, Comment
+from .models import Coupon, Comment, Hashtag
 
 
 # Form for the signup of a new user

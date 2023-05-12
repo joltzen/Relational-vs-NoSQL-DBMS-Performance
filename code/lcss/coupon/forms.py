@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Coupon, Comment
+from .models import Coupon, Comment, Hashtag
 
 
 # Form to create a new User
@@ -35,6 +35,8 @@ class getUserForm(forms.ModelForm):
 
 
 class createCouponForm(forms.ModelForm):
+    hashtags = forms.CharField(required=False)
+
     class Meta:
         model = Coupon
         widgets = {
@@ -44,7 +46,28 @@ class createCouponForm(forms.ModelForm):
             "name",
             "expiring_date",
             "discount_amt",
+            "hashtags",
         ]
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        hashtag_names = self.cleaned_data.get("hashtags", "").split(",")
+        hashtags = []
+        for name in hashtag_names:
+            hashtag, created = Hashtag.objects.get_or_create(
+                name="#" + name.strip().replace(" ", "")
+            )
+            if created:
+                print("Created new hashtag: ", hashtag)
+            else:
+                print("Found existing hashtag: ", hashtag)
+            hashtags.append(hashtag)
+        if hashtags:
+            instance.save()
+            instance.hashtags.set(hashtags)
+        else:
+            instance.save()
+        return instance
 
 
 class CommentForm(forms.ModelForm):
