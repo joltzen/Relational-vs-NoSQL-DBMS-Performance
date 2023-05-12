@@ -176,3 +176,9 @@ def all_comments(request, coupon_id):
     return render(
         request, "all_comments.html", {"coupon": coupon, "comments": comments}
     )
+
+
+def coupon_by_hashtag(request, hashtag_name):
+    coupons = Coupon.objects.filter(hashtags__name=hashtag_name)
+    context = {"coupons": coupons, "hashtag_name": hashtag_name}
+    return render(request, "coupon_by_hashtag.html", context)
