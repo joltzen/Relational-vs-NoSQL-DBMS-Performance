@@ -76,6 +76,7 @@ WSGI_APPLICATION = "lcss.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# default Database
 """DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -83,6 +84,8 @@ WSGI_APPLICATION = "lcss.wsgi.application"
     }
 }
 """
+
+# local postgres Database
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -90,6 +93,18 @@ DATABASES = {
         "USER": "joltzen",
         "PASSWORD": "lcssteam07",
         "HOST": "localhost",
+        "PORT": "5432",
+    }
+}
+
+# google cloud postgres database
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgres",
+        "USER": "postgres",
+        "PASSWORD": "lcssteam07",
+        "HOST": "34.159.228.145",
         "PORT": "5432",
     }
 }
