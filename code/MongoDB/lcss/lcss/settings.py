@@ -76,8 +76,8 @@ WSGI_APPLICATION = "lcss.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# default Database
-"""DATABASES = {
+"""# default Database
+DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
@@ -85,30 +85,27 @@ WSGI_APPLICATION = "lcss.wsgi.application"
 }
 """
 
-# local postgres Database
-"""
-DATABASES = {
+#
+"""""DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "coupon",
-        "USER": "joltzen",
-        "PASSWORD": "lcssteam07",
-        "HOST": "localhost",
-        "PORT": "5432",
+        "ENGINE": "djongo",
+        "NAME": "lcss",
     }
 }"""
 
-# google cloud postgres database
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "PASSWORD": "lcssteam07",
-        "HOST": "34.159.228.145",
-        "PORT": "5432",
+        "ENGINE": "djongo",
+        "NAME": "lcss",
+        "ENFORCE_SCHEMA": False,
+        "CLIENT": {
+            "host": "mongodb+srv://joltzen:DlHIfGVEp7ACvkeX@cluster0.rzkcrjr.mongodb.net/"
+        },
     }
 }
+
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
