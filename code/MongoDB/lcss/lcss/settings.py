@@ -100,7 +100,7 @@ DATABASES = {
         "NAME": "lcss",
         "ENFORCE_SCHEMA": False,
         "CLIENT": {
-            "host": "mongodb+srv://joltzen:DlHIfGVEp7ACvkeX@cluster0.rzkcrjr.mongodb.net/"
+            "host": "mongodb+srv://<username>:<password>@cluster0.rzkcrjr.mongodb.net/"
         },
     }
 }
