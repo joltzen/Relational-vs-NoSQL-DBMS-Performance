@@ -98,9 +98,9 @@ DATABASES = {
     "default": {
         "ENGINE": "djongo",
         "NAME": "lcss",
-        "ENFORCE_SCHEMA": False,
+        "ENFORCE_SCHEMA": True,
         "CLIENT": {
-            "host": "mongodb+srv://<username>:<password>@cluster0.rzkcrjr.mongodb.net/"
+            "host": "mongodb+srv://joltzen:7iCd8TdyShmtyjLV@lcss.5t4isnv.mongodb.net/"
         },
     }
 }

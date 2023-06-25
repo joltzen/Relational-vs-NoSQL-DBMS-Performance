@@ -86,7 +86,7 @@ WSGI_APPLICATION = "lcss.wsgi.application"
 """
 
 # local postgres Database
-"""
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -96,9 +96,9 @@ DATABASES = {
         "HOST": "localhost",
         "PORT": "5432",
     }
-}"""
+}
 
-# google cloud postgres database
+"""# google cloud postgres database
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -108,7 +108,7 @@ DATABASES = {
         "HOST": "34.159.228.145",
         "PORT": "5432",
     }
-}
+}"""
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
