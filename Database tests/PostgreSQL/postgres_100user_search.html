@@ -120,7 +120,7 @@ table.stats tr.total td {
 
         <div class="info">
             
-            <p>During: <span class="l10n datetime">2023-06-27 12:49:05</span> - <span class="l10n datetime">2023-06-27 12:49:07</span></p>
+            <p>During: <span class="l10n datetime">2023-06-26 11:55:13</span> - <span class="l10n datetime">2023-06-26 11:57:54</span></p>
             <p>Target Host: <span>http://localhost:8000</span></p>
             <p>Script: <span>locustfile.py</span></p>
         </div>
@@ -146,28 +146,28 @@ table.stats tr.total td {
                     
                         <tr>
                             <td>GET</td>
-                            <td>/coupons/1/</td>
-                            <td>150</td>
-                            <td>25</td>
-                            <td>164</td>
-                            <td>8</td>
-                            <td>404</td>
-                            <td>2157</td>
-                            <td>65.8</td>
-                            <td>11.0</td>
+                            <td>/search_coupons/?csrfmiddlewaretoken=UETiswiUsrvVPT9RTjzECuMfksyTo4brG4OoyGRWlZcYyWjDmRrfibEySrvxmW57&amp;search_query=test</td>
+                            <td>5582</td>
+                            <td>0</td>
+                            <td>30</td>
+                            <td>10</td>
+                            <td>126</td>
+                            <td>7105</td>
+                            <td>34.6</td>
+                            <td>0.0</td>
                         </tr>
                     
                         <tr class="total">
                             <td></td>
                             <td>Aggregated</td>
-                            <td>150</td>
-                            <td>25</td>
-                            <td>164</td>
-                            <td>8</td>
-                            <td>404</td>
-                            <td>2157</td>
-                            <td>65.8</td>
-                            <td>11.0</td>
+                            <td>5582</td>
+                            <td>0</td>
+                            <td>30</td>
+                            <td>10</td>
+                            <td>126</td>
+                            <td>7105</td>
+                            <td>34.6</td>
+                            <td>0.0</td>
                         </tr>
                     
                 </tbody>
@@ -195,28 +195,28 @@ table.stats tr.total td {
                     
                         <tr>
                             <td>GET</td>
-                            <td>/coupons/1/</td>
-                            <td>150</td>
-                            <td>200</td>
-                            <td>250</td>
-                            <td>320</td>
-                            <td>360</td>
-                            <td>400</td>
-                            <td>400</td>
-                            <td>400</td>
+                            <td>/search_coupons/?csrfmiddlewaretoken=UETiswiUsrvVPT9RTjzECuMfksyTo4brG4OoyGRWlZcYyWjDmRrfibEySrvxmW57&amp;search_query=test</td>
+                            <td>28</td>
+                            <td>31</td>
+                            <td>33</td>
+                            <td>37</td>
+                            <td>42</td>
+                            <td>47</td>
+                            <td>62</td>
+                            <td>130</td>
                         </tr>
                     
                         <tr class="total">
                             <td></td>
                             <td>Aggregated</td>
-                            <td>150</td>
-                            <td>200</td>
-                            <td>250</td>
-                            <td>320</td>
-                            <td>360</td>
-                            <td>400</td>
-                            <td>400</td>
-                            <td>400</td>
+                            <td>28</td>
+                            <td>31</td>
+                            <td>33</td>
+                            <td>37</td>
+                            <td>42</td>
+                            <td>47</td>
+                            <td>62</td>
+                            <td>130</td>
                         </tr>
                     
                 </tbody>
@@ -224,33 +224,13 @@ table.stats tr.total td {
         </div>
 
         
-            <div class="failures">
-                <h2>Failures Statistics</h2>
-                <table class="stats">
-                    <thead>
-                        <tr>
-                            <th class="sortable">Method</th>
-                            <th class="sortable">Name</th>
-                            <th class="sortable">Error</th>
-                            <th class="sortable">Occurrences</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                            <tr>
-                                <td>GET</td>
-                                <td>/coupons/1/</td>
-                                <td>[Errno 54] Connection reset by peer</td>
-                                <td>25</td>
-                            </tr>
-                        
-                    </tbody>
-                </table>
+
+        
+
+        
+            <div class="charts-container">
+                <h2>Charts</h2>
             </div>
-        
-
-        
-
         
 
         <div id="tasks">
@@ -532,12 +512,12 @@ function fillTasksFromRequest() {
     <script>
         
 var stats_history = {
-    "time": [].map(server_time => new Date(new Date().setUTCHours(...(server_time.split(":")))).toLocaleTimeString()),
-    "user_count": [],
-    "current_rps": [],
-    "current_fail_per_sec": [],
-    "response_time_percentile_1": [],
-    "response_time_percentile_2": [],
+    "time": ["11:55:17", "11:55:22", "11:55:27", "11:55:32", "11:55:37", "11:55:42", "11:55:47", "11:55:52", "11:55:57", "11:56:02", "11:56:07", "11:56:12", "11:56:17", "11:56:22", "11:56:27", "11:56:32", "11:56:37", "11:56:42", "11:56:47", "11:56:52", "11:56:57", "11:57:02", "11:57:07", "11:57:12", "11:57:17", "11:57:22", "11:57:27", "11:57:32", "11:57:37", "11:57:42", "11:57:47", "11:57:52"].map(server_time => new Date(new Date().setUTCHours(...(server_time.split(":")))).toLocaleTimeString()),
+    "user_count": [{"value": 5}, {"value": 10}, {"value": 15}, {"value": 20}, {"value": 25}, {"value": 30}, {"value": 35}, {"value": 40}, {"value": 45}, {"value": 50}, {"value": 55}, {"value": 60}, {"value": 65}, {"value": 70}, {"value": 74}, {"value": 79}, {"value": 84}, {"value": 89}, {"value": 94}, {"value": 99}, {"value": 100}, {"value": 100}, {"value": 100}, {"value": 100}, {"value": 100}, {"value": 100}, {"value": 100}, {"value": 100}, {"value": 100}, {"value": 100}, {"value": 100}, {"value": 100}],
+    "current_rps": [{"users": 5, "value": 1.5}, {"users": 10, "value": 2.4285714285714284}, {"users": 15, "value": 4.1}, {"users": 20, "value": 6.6}, {"users": 25, "value": 9.2}, {"users": 30, "value": 11.8}, {"users": 35, "value": 14.4}, {"users": 40, "value": 16.3}, {"users": 45, "value": 18.7}, {"users": 50, "value": 22.0}, {"users": 55, "value": 23.8}, {"users": 60, "value": 26.0}, {"users": 65, "value": 28.6}, {"users": 70, "value": 30.6}, {"users": 74, "value": 33.2}, {"users": 79, "value": 36.3}, {"users": 84, "value": 38.9}, {"users": 89, "value": 41.0}, {"users": 94, "value": 43.8}, {"users": 99, "value": 46.8}, {"users": 100, "value": 49.2}, {"users": 100, "value": 49.1}, {"users": 100, "value": 48.3}, {"users": 100, "value": 49.7}, {"users": 100, "value": 50.5}, {"users": 100, "value": 49.9}, {"users": 100, "value": 49.1}, {"users": 100, "value": 48.7}, {"users": 100, "value": 49.3}, {"users": 100, "value": 48.8}, {"users": 100, "value": 48.5}, {"users": 100, "value": 50.2}],
+    "current_fail_per_sec": [{"users": 5, "value": 0}, {"users": 10, "value": 0}, {"users": 15, "value": 0}, {"users": 20, "value": 0}, {"users": 25, "value": 0}, {"users": 30, "value": 0}, {"users": 35, "value": 0}, {"users": 40, "value": 0}, {"users": 45, "value": 0}, {"users": 50, "value": 0}, {"users": 55, "value": 0}, {"users": 60, "value": 0}, {"users": 65, "value": 0}, {"users": 70, "value": 0}, {"users": 74, "value": 0}, {"users": 79, "value": 0}, {"users": 84, "value": 0}, {"users": 89, "value": 0}, {"users": 94, "value": 0}, {"users": 99, "value": 0}, {"users": 100, "value": 0}, {"users": 100, "value": 0}, {"users": 100, "value": 0}, {"users": 100, "value": 0}, {"users": 100, "value": 0}, {"users": 100, "value": 0}, {"users": 100, "value": 0}, {"users": 100, "value": 0}, {"users": 100, "value": 0}, {"users": 100, "value": 0}, {"users": 100, "value": 0}, {"users": 100, "value": 0}],
+    "response_time_percentile_1": [{"users": 5, "value": 80}, {"users": 10, "value": 59}, {"users": 15, "value": 33}, {"users": 20, "value": 31}, {"users": 25, "value": 32}, {"users": 30, "value": 32}, {"users": 35, "value": 32}, {"users": 40, "value": 31}, {"users": 45, "value": 31}, {"users": 50, "value": 32}, {"users": 55, "value": 30}, {"users": 60, "value": 29}, {"users": 65, "value": 29}, {"users": 70, "value": 29}, {"users": 74, "value": 28}, {"users": 79, "value": 29}, {"users": 84, "value": 29}, {"users": 89, "value": 29}, {"users": 94, "value": 27}, {"users": 99, "value": 27}, {"users": 100, "value": 29}, {"users": 100, "value": 28}, {"users": 100, "value": 28}, {"users": 100, "value": 27}, {"users": 100, "value": 28}, {"users": 100, "value": 28}, {"users": 100, "value": 28}, {"users": 100, "value": 29}, {"users": 100, "value": 28}, {"users": 100, "value": 28}, {"users": 100, "value": 28}, {"users": 100, "value": 28}],
+    "response_time_percentile_2": [{"users": 5, "value": 93}, {"users": 10, "value": 87}, {"users": 15, "value": 64}, {"users": 20, "value": 42}, {"users": 25, "value": 49}, {"users": 30, "value": 46}, {"users": 35, "value": 44}, {"users": 40, "value": 46}, {"users": 45, "value": 49}, {"users": 50, "value": 48}, {"users": 55, "value": 45}, {"users": 60, "value": 44}, {"users": 65, "value": 43}, {"users": 70, "value": 44}, {"users": 74, "value": 45}, {"users": 79, "value": 45}, {"users": 84, "value": 44}, {"users": 89, "value": 49}, {"users": 94, "value": 46}, {"users": 99, "value": 46}, {"users": 100, "value": 52}, {"users": 100, "value": 50}, {"users": 100, "value": 45}, {"users": 100, "value": 46}, {"users": 100, "value": 52}, {"users": 100, "value": 50}, {"users": 100, "value": 45}, {"users": 100, "value": 45}, {"users": 100, "value": 46}, {"users": 100, "value": 45}, {"users": 100, "value": 42}, {"users": 100, "value": 43}],
     "markers": [],
 };
         var percentile1 = 0.5
