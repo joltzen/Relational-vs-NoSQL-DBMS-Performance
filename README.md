@@ -121,7 +121,7 @@ The performance of PostgreSQL and MongoDB is compared in terms of execution time
 Both PostgreSQL and MongoDB have their strengths. PostgreSQL is generally faster for reading data, complex queries, and bulk inserts, while MongoDB is faster for simple write operations. The choice between them should be made based on the specific needs and context of the application.
 
 ## References
-[Locust.io](https://locust.io/)
-[BANKS: Browsing and Keyword Searching in Relational Databases](https://www.sciencedirect.com/science/article/abs/pii/B9781558608696501141)
-[Integrated Environment Based on Anytime Solution Search Algorithms and A Non-Relational Database for Real-Time Intelligent Systems](https://ceur-ws.org/Vol-2648/paper26.pdf)
-[Enhanced query processing over semantic cache for cloud-based relational databases](https://link.springer.com/article/10.1007/s12652-020-01943-x)
+- [Locust.io](https://locust.io/)
+- [BANKS: Browsing and Keyword Searching in Relational Databases](https://www.sciencedirect.com/science/article/abs/pii/B9781558608696501141)
+- [Integrated Environment Based on Anytime Solution Search Algorithms and A Non-Relational Database for Real-Time Intelligent Systems](https://ceur-ws.org/Vol-2648/paper26.pdf)
+- [Enhanced query processing over semantic cache for cloud-based relational databases](https://link.springer.com/article/10.1007/s12652-020-01943-x)
